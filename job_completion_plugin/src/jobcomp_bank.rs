@@ -90,22 +90,22 @@ pub extern "C" fn slurm_jobcomp_log_record(job_ptr: *const job_record) -> u32 {
 
     let account: String = match safe_helpers::deref_cstr(unsafe { (*job_ptr).account }) {
         Some(account) => account,
-        None => return ESLURM_INVALID_ACCOUNT,
+        None => return slurm_err_t_ESLURM_INVALID_ACCOUNT,
     };
     let partition: String = match safe_helpers::deref_cstr(unsafe { (*(*job_ptr).part_ptr).name }) {
         Some(partition) => partition,
-        None => return ESLURM_INVALID_PARTITION_NAME,
+        None => return slurm_err_t_ESLURM_INVALID_PARTITION_NAME,
     };
     let qos: String = match safe_helpers::deref_cstr(unsafe { (*(*job_ptr).qos_ptr).name }) {
         Some(qos) => qos,
-        None => return ESLURM_INVALID_QOS,
+        None => return slurm_err_t_ESLURM_INVALID_QOS,
     };
     let cpu_count = unsafe { (*job_ptr).total_cpus };
     let time_spent = (unsafe { (*job_ptr).end_time }) - (unsafe { (*job_ptr).start_time }); // in seconds
 
     let expected_cost = match accounting::expected_cost(&partition, cpu_count, time_spent, &conf) {
         Some(cost) => cost,
-        None => return ESLURM_INTERNAL,
+        None => return slurm_err_t_ESLURM_INTERNAL,
     };
 
     let jobslurmid = (unsafe { (*job_ptr).job_id }).to_string();

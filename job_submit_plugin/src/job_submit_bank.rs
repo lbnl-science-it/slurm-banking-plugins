@@ -80,7 +80,7 @@ pub extern "C" fn job_submit(
     log("job_submit() settings loaded");
     let partition: String = match safe_helpers::deref_cstr(unsafe { (*job_desc).partition }) {
         Some(partition) => partition,
-        None => return ESLURM_INVALID_PARTITION_NAME,
+        None => return slurm_err_t_ESLURM_INVALID_PARTITION_NAME,
     };
     log("job_submit() loaded partition");
 
@@ -98,7 +98,7 @@ pub extern "C" fn job_submit(
     log("job_submit() loaded userid");
     let account: String = match safe_helpers::deref_cstr(unsafe { (*job_desc).account }) {
         Some(account) => account,
-        None => return ESLURM_INVALID_ACCOUNT,
+        None => return slurm_err_t_ESLURM_INVALID_ACCOUNT,
     };
     log("job_submit() loaded account");
 
@@ -131,7 +131,7 @@ pub extern "C" fn job_submit(
     let expected_cost =
         match accounting::expected_cost(&partition, max_cpus, time_limit_seconds, &conf) {
             Some(cost) => cost,
-            None => return ESLURM_INTERNAL,
+            None => return slurm_err_t_ESLURM_INTERNAL,
         };
 
     log(&format!(
@@ -165,7 +165,7 @@ pub extern "C" fn job_submit(
         false => {
             let msg = std::ffi::CString::new("This user/account pair does not have enough service units to afford this job's estimated cost").unwrap();
             unsafe { *error_msg = xstrdup(msg.as_ptr()) }
-            ESLURM_ACCOUNTING_POLICY
+            slurm_err_t_ESLURM_ACCOUNTING_POLICY
         }
     }
 }
