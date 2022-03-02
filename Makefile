@@ -38,14 +38,11 @@ docker: docker/**/* **/*
 
 .PHONY: docker-dev
 docker-dev: docker/**/* **/*
-	docker build -t docker-centos7-slurm:latest docker-centos7-slurm
-	docker build -f docker/dev/Dockerfile -t slurm-banking-plugins-centos7-dev .
+	# docker build -t docker-centos7-slurm:latest docker-centos7-slurm
+	docker build -f docker/dev/Dockerfile -t slurm-banking-plugins-centos7-dev:21.08.6 .
 	docker run \
-		-v $(shell pwd)/job_submit_plugin/src:/slurm-banking-plugins/job_submit_plugin/src \
-		-v $(shell pwd)/job_completion_plugin/src:/slurm-banking-plugins/job_completion_plugin/src \
-		-v $(shell pwd)/spank_plugin/src:/slurm-banking-plugins/spank_plugin/src \
-		-v $(shell pwd)/slurm_banking/src:/slurm-banking-plugins/slurm_banking/src \
-		-it -h ernie slurm-banking-plugins-centos7-dev
+		-v $(shell pwd):/slurm-banking-plugins \
+		-it -h slurmctl slurm-banking-plugins-centos7-dev:21.08.6
 		
 .PHONY: docker-centos6-dev
 docker-centos6-dev: docker/**/* **/*
