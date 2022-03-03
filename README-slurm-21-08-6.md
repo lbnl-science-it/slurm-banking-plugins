@@ -38,7 +38,7 @@ Now if you run
 $ make docker-dev
 ```
 
-It will build a docker image for `slurm-banking-plugins-centos7-dev:21.08.6`, launch a container based on that image, and drop you into a shell on the container. From there, you can download the source code for Slurm, then build the Slurm bankding plugins:
+It will build a docker image for [slurm-banking-plugins-centos7-dev:21.08.6](https://github.com/giovtorres/docker-centos7-slurm), launch a container based on that image, and drop you into a shell on the container. From there, you can download the source code for Slurm, then build the Slurm bankding plugins:
 
 ```
 SLURM_TAG=slurm-21-08-6-1
