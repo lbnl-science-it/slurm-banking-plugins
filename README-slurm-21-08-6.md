@@ -7,7 +7,7 @@ $ cd slurm-banking-plugins
 
 ## Source Code Changes
 
-I only needed to make some minor changes to 2 files in order to successfully build the Slurm banking plugins with Slurm 21-8-6. On my Mac, I did:
+I only needed to make some minor changes to 2 files in order to successfully build the Slurm banking plugins with Slurm 21.08.6. On my Mac, I did:
 
 ```
 $ sed -i '' -e 's/ESLURM/slurm_err_t_ESLURM/g' job_completion_plugin/src/jobcomp_bank.rs
