@@ -1,4 +1,4 @@
-This branch was created in order to port the Slurm banking plugins for Slurm 21-8-6. To clone this branch, run
+This branch was created in order to port the Slurm banking plugins to Slurm 21.08.6. To clone this branch, run
 
 ```
 $ git clone -b slurm-21-08-6 git@github.com:lbnl-science-it/slurm-banking-plugins.git
