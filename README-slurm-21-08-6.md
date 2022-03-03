@@ -23,7 +23,7 @@ $ sed -i 's/ESLURM/slurm_err_t_ESLURM/g' job_submit_plugin/src/job_submit_bank.r
 
 ## Developing Environment
 
-I also modified the [Dockerfile](https://github.com/lbnl-science-it/slurm-banking-plugins/blob/slurm-21-08-6/docker/dev/Dockerfile) for the dev container, which now uses `giovtorres/docker-centos7-slurm:21.08.6` as the base. I also lightly modified the `docker-dev` stanza of the [Makefile](https://github.com/lbnl-science-it/slurm-banking-plugins/blob/slurm-21-08-6/Makefile)
+I modified the [Dockerfile](https://github.com/lbnl-science-it/slurm-banking-plugins/blob/slurm-21-08-6/docker/dev/Dockerfile) for the dev container, which now uses `giovtorres/docker-centos7-slurm:21.08.6` as the base. I also lightly modified the `docker-dev` stanza of the [Makefile](https://github.com/lbnl-science-it/slurm-banking-plugins/blob/slurm-21-08-6/Makefile)
 
 ```
 	docker build -f docker/dev/Dockerfile -t slurm-banking-plugins-centos7-dev:21.08.6 .
