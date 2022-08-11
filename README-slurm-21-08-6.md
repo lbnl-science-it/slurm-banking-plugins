@@ -7,7 +7,7 @@ $ cd slurm-banking-plugins
 
 ## Source Code Changes
 
-I only needed to make some minor changes to 2 files in order to successfully build the Slurm banking plugins with Slurm 21.08.6. On my Mac, I did:
+There are some API changes between Slurm v20.11 and v21.08. I only needed to make some minor changes to 2 files in order to successfully build the Slurm banking plugins with Slurm 21.08.6. On my Mac, I did:
 
 ```
 $ sed -i '' -e 's/ESLURM/slurm_err_t_ESLURM/g' job_completion_plugin/src/jobcomp_bank.rs
@@ -20,6 +20,15 @@ Note that BSD sed syntaxt is slightly different from GNU sed syntaxt. On a Linux
 $ sed -i 's/ESLURM/slurm_err_t_ESLURM/g' job_completion_plugin/src/jobcomp_bank.rs
 $ sed -i 's/ESLURM/slurm_err_t_ESLURM/g' job_submit_plugin/src/job_submit_bank.rs
 ```
+
+Additionally, there are API changes for the jobcomp plugin (see <https://github.com/SchedMD/slurm/blob/slurm-21.08/src/plugins/jobcomp/none/jobcomp_none.c> for an example). I made the following changes to `job_completion_plugin/src/jobcomp_bank.rs`:
+
+* replaced `slurm_jobcomp_set_location` with `jobcomp_p_set_location`
+* replaced `slurm_jobcomp_log_record` with `jobcomp_p_log_record`
+* replaced `slurm_jobcomp_get_jobs` with `jobcomp_p_get_jobs`
+* replaced `slurm_jobcomp_archive` with `jobcomp_p_archive`
+* deleted function `slurm_jobcomp_strerror`
+* deleted function `slurm_jobcomp_strerror`
 
 ## Developing Environment
 

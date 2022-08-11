@@ -67,12 +67,12 @@ pub extern "C" fn fini() -> u32 {
 }
 
 #[no_mangle]
-pub extern "C" fn slurm_jobcomp_set_location(_location: *const c_char) -> u32 {
+pub extern "C" fn jobcomp_p_set_location(_location: *const c_char) -> u32 {
     SLURM_SUCCESS
 }
 
 #[no_mangle]
-pub extern "C" fn slurm_jobcomp_log_record(job_ptr: *const job_record) -> u32 {
+pub extern "C" fn jobcomp_p_log_record(job_ptr: *const job_record) -> u32 {
     log("slurm_jobcomp_log_record() invoked");
     // BEGIN: Check if this plugin should be enabled
     let conf = &SETTINGS;
@@ -181,22 +181,12 @@ pub extern "C" fn slurm_jobcomp_log_record(job_ptr: *const job_record) -> u32 {
 }
 
 #[no_mangle]
-pub extern "C" fn slurm_jobcomp_get_errno() -> u32 {
-    return 3100;
-}
-
-#[no_mangle]
-pub extern "C" fn slurm_jobcomp_strerror(_errnum: u32) -> *const c_char {
-    std::ptr::null()
-}
-
-#[no_mangle]
-pub extern "C" fn slurm_jobcomp_get_jobs(_job_cond: *const slurmdb_job_cond_t) -> List {
+pub extern "C" fn jobcomp_p_get_jobs(_job_cond: *const slurmdb_job_cond_t) -> List {
     let null: *const slurm_banking::bindings::xlist = std::ptr::null();
     return null as *mut slurm_banking::bindings::xlist;
 }
 
 #[no_mangle]
-pub extern "C" fn slurm_jobcomp_archive(_arch_cond: *const slurmdb_archive_cond_t) -> u32 {
+pub extern "C" fn jobcomp_p_archive(_arch_cond: *const slurmdb_archive_cond_t) -> u32 {
     return SLURM_SUCCESS;
 }
