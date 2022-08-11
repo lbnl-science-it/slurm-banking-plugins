@@ -27,7 +27,7 @@ Additionally, there are API changes for the jobcomp plugin (see <https://github.
 * replaced `slurm_jobcomp_log_record` with `jobcomp_p_log_record`
 * replaced `slurm_jobcomp_get_jobs` with `jobcomp_p_get_jobs`
 * replaced `slurm_jobcomp_archive` with `jobcomp_p_archive`
-* deleted function `slurm_jobcomp_strerror`
+* deleted function `slurm_jobcomp_get_errno`
 * deleted function `slurm_jobcomp_strerror`
 
 ## Developing Environment
